@@ -1,6 +1,9 @@
 name: Healthy Watcher Monitor
 
 on:
+  push:
+    branches:
+      - main      # or whichever branch you want to trigger on
   schedule:
     - cron: "*/30 * * * *"
   workflow_dispatch:
