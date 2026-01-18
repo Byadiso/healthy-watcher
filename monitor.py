@@ -4,13 +4,9 @@ from datetime import datetime
 from database import get_sites, update_status
 import os
 
-# TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-# TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-
-
-TELEGRAM_BOT_TOKEN = "8188686402:AAFht6MjOzQTDutysW-_kfUZn9LVya5a7rI"
-TELEGRAM_CHAT_ID = "2046825005"
 
 def send_telegram(msg):
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:

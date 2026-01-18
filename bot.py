@@ -4,9 +4,8 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from database import init_db, add_site
 
 
-# TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-TELEGRAM_BOT_TOKEN = "8188686402:AAFht6MjOzQTDutysW-_kfUZn9LVya5a7rI"
 
 init_db()
 
