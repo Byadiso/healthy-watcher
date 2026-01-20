@@ -17,9 +17,6 @@ from checker import check_website
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-# TELEGRAM_BOT_TOKEN = "8188686402:AAFht6MjOzQTDutysW-_kfUZn9LVya5a7rI"
-# TELEGRAM_CHAT_ID = "2046825005"
-
 
 init_db()
 

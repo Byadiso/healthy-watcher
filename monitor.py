@@ -8,8 +8,6 @@ from database import get_all_sites, update_status, save_check
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 
-
-
 def send_telegram(chat_id, message):
     if not TELEGRAM_BOT_TOKEN:
         print("❌ TELEGRAM_BOT_TOKEN missing")
