@@ -1,205 +1,117 @@
+# Healthy Watcher
+
+**Healthy Watcher** is a lightweight, all-in-one website monitoring system. It automatically checks website health, calculates uptime, and sends real-time Telegram alerts, all managed through a professional web-based dashboard.
+
+### 🔗 [Access the Live Dashboard](https://healthy-watcher.streamlit.app/)
+
+*(Note: Registration requires a secret Invite Code)*
 
 ---
 
-# 🫀 Healthy Watcher
+## 🚀 Key Features
 
-**Healthy Watcher** is a lightweight website monitoring system that checks your website health automatically and sends real-time Telegram alerts when your site goes down or comes back online.
-
-It also tracks **response time**, **uptime percentage**, and **historical health data** — all without expensive tools or complex dashboards.
-
----
-
-## Features
-
-✅ Website uptime monitoring (every 30 minutes)
-✅ Instant Telegram alerts (DOWN & BACK ONLINE)
-✅ Response time tracking
-✅ Uptime percentage calculation (last 24 hours)
-✅ Health history storage (SQLite)
-✅ Multi-website support per Telegram user
-✅ Works with GitHub Actions (cloud monitoring)
+* **Automated Monitoring:** Checks website status and response times every 30 minutes.
+* **Real-time Alerts:** Instant Telegram notifications for `DOWN` and `BACK ONLINE` events.
+* **Web Dashboard:** Interactive UI for non-technical users to visualize health data.
+* **Secure Access:** Multi-user support with hashed password security and invite-only registration.
+* **Site Management:** Add or remove monitored URLs directly via the web interface or Telegram.
+* **Audit Logging:** Complete transparency with logs of user logins and administrative actions.
+* **Zero-Server Cost:** Designed to run entirely on GitHub Actions and Streamlit Cloud.
 
 ---
 
-## How It Works
+## 🛠 Tech Stack
 
-1. User adds websites via Telegram bot
-2. Websites are stored in a local SQLite database
-3. GitHub Actions runs the monitor every 30 minutes
-4. Each check is saved with:
-
-   * status (ok / down)
-   * response time
-   * timestamp
-5. Alerts are sent only when status changes
-6. Users can request uptime reports anytime
+* **Frontend:** [Streamlit](https://streamlit.io/) (Data-focused Web Framework)
+* **Backend:** Python 3.10
+* **Database:** SQLite (Relational storage for sites, history, users, and logs)
+* **Automation:** GitHub Actions (Scheduled monitoring cron-job)
+* **Visuals:** Plotly & Pandas
 
 ---
 
-## Telegram Commands
+## 📊 How It Works
 
-### `/start`
-
-Start the bot and see instructions.
-
-### `/add`
-
-Add a website to monitor.
-
-```
-/add https://example.com https://example.com/contact https://example.com/booking
-```
-
-### `/list`
-
-List all monitored websites.
-
-### `/status`
-
-Check live website status and response time.
-
-```
-/status https://example.com
-```
-
-### `/uptime`
-
-View uptime percentage (last 24 hours).
-
-```
-/uptime https://example.com
-```
+1. **Management:** Users add websites via the **Telegram Bot** or the **Web Dashboard**.
+2. **Monitoring:** A GitHub Action triggers `monitor.py` every 30 mins to ping each URL.
+3. **Alerting:** If a site status changes (e.g., OK → DOWN), a Telegram alert is dispatched.
+4. **Reporting:** All data is saved to `sites.db`. The dashboard pulls this data to generate real-time metrics and response-time charts.
 
 ---
 
-## Uptime Calculation
+## 🤖 Telegram Commands
 
-Uptime is calculated using real monitoring data:
-
-```
-uptime % = (successful checks / total checks) × 100
-```
-
-Example:
-
-* 48 checks in 24 hours
-* 47 successful
-* uptime = **97.91%**
+| Command | Description |
+| --- | --- |
+| `/start` | Welcome message and setup instructions |
+| `/add <url> <contact> <booking>` | Register a new site for monitoring |
+| `/list` | List all websites you are currently watching |
+| `/status <url>` | Get an instant health check and response time |
+| `/uptime <url>` | View the 24-hour uptime percentage |
 
 ---
 
-## Tech Stack
+## 🔐 Configuration (Secrets)
 
-* **Python 3.10**
-* **Telegram Bot API**
-* **SQLite**
-* **GitHub Actions (cron monitoring)**
-* **Requests library**
+To run this project, add the following to your **GitHub Secrets** and **Streamlit Secrets**:
+
+* `TELEGRAM_BOT_TOKEN`: Your bot's API token from BotFather.
+* `INVITE_CODE`: A secret string used to gatekeep the dashboard registration.
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
-```
+```text
 healthy-watcher/
-│
-├── bot.py               # Telegram bot
-├── monitor.py           # Monitoring script
-├── database.py          # Database logic
-├── requirements.txt
-├── sites.db              # SQLite database
+├── dashboard.py         # Streamlit Web UI & Site Management
+├── monitor.py           # The "Engine" - runs the pings
+├── bot.py               # Telegram Bot interface
+├── database.py          # Unified SQLite CRUD operations
+├── requirements.txt     # Python dependencies
+├── sites.db             # SQLite database file (Auto-initialized)
 └── .github/workflows/
-    └── monitor.yml      # GitHub Actions cron
+    └── monitor.yml      # Cron-job config (runs every 30m)
+
 ```
 
 ---
 
-## Monitoring Schedule
+## 🛠 Local Development
 
-Monitoring runs automatically every **30 minutes** using GitHub Actions:
-
-```
-*/30 * * * *
-```
-
-This means:
-
-* 48 checks per day
-* Reliable uptime statistics
-* Cloud-based monitoring (no server needed)
-
----
-
-## Environment Variables
-
-Set these in **GitHub Secrets**:
-
-| Name               | Description             |
-| ------------------ | ----------------------- |
-| TELEGRAM_BOT_TOKEN | Your Telegram bot token |
-
-> ⚠️ Never commit your bot token to GitHub.
-
----
-
-## Local Development
-
+1. **Clone the Repository:**
 ```bash
-python -m venv venv
-source venv/bin/activate
+git clone https://github.com/your-username/healthy-watcher.git
+cd healthy-watcher
+
+```
+
+
+2. **Install Requirements:**
+```bash
 pip install -r requirements.txt
-python bot.py
+
 ```
 
-To test monitoring locally:
 
+3. **Run the UI:**
 ```bash
-python monitor.py
+streamlit run dashboard.py
+
 ```
 
----
 
-## Use Cases
-
-* Website uptime monitoring
-* Small business websites
-* Freelancers & agencies
-* WordPress health checks
-* Booking / contact page monitoring
-* Lightweight alternative to paid tools
 
 ---
 
-## Future Features (Planned)
+## 👨‍💻 Author
 
-* 📈 7-day & 30-day uptime reports
-* 🕒 Downtime duration tracking
-* 📧 Email alerts
-* 🌐 Public status pages
-* 💳 Paid plans & subscriptions
-* 🔌 WordPress plugin integration
-
----
-
-## Why Healthy Watcher?
-
-Most uptime tools are expensive and complex.
-
-Healthy Watcher focuses on:
-
-✔ simplicity
-✔ automation
-✔ real data
-✔ Telegram-first experience
-
-Built for developers, freelancers, and small businesses.
+**BYAMUNGU Desire** *Lead Developer & Project Architect*
 
 ---
 
 ## 📜 License
 
-MIT License — free to use, modify, and extend.
+MIT License — Feel free to fork and use for your own services.
 
 ---
-
-
