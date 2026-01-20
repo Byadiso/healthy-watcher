@@ -1,3 +1,5 @@
+## ⚙️ Automation Status
+![Monitor Status](https://github.com/Byadiso/healthy-watcher/actions/workflows/healthy-watcher.yml/badge.svg)
 # Healthy Watcher
 
 **Healthy Watcher** is a lightweight, all-in-one website monitoring system. It automatically checks website health, calculates uptime, and sends real-time Telegram alerts, all managed through a professional web-based dashboard.
