@@ -73,7 +73,7 @@ healthy-watcher/
 ├── requirements.txt     # Python dependencies
 ├── sites.db             # SQLite database file (Auto-initialized)
 └── .github/workflows/
-    └── monitor.yml      # Cron-job config (runs every 30m)
+    └── healthy-watcher.yml      # Cron-job config (runs every 30m)
 
 ```
 
@@ -108,7 +108,7 @@ streamlit run dashboard.py
 
 ## 👨‍💻 Author
 
-**BYAMUNGU Desire** *Lead Developer & Project Architect*
+**BYAMUNGU Desire**
 
 ---
 
