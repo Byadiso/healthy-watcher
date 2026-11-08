@@ -113,7 +113,7 @@ else:
                 m2.metric("Online", len(df[df['last_status'] == 'ok']))
                 m3.metric("Offline", len(df[df['last_status'] != 'ok']), delta_color="inverse")
 
-                st.dataframe(df.style.applymap(lambda x: f'background-color: {"#90ee90" if x == "ok" else "#ffcccb"}', subset=['last_status']), use_container_width=True, hide_index=True)
+                st.dataframe(df.style.map(lambda x: f'background-color: {"#90ee90" if x == "ok" else "#ffcccb"}', subset=['last_status']), use_container_width=True, hide_index=True)
                 
                 # Chart
                 conn = get_db_connection()
